@@ -72,8 +72,8 @@ if ($filter == true) {
     <main id="site_main" style="height: 100vh;" class="d-flex align-items-center justify-content-center bg-success">
         <div class="container bg-secondary rounded-5 p-4">
             <h1 class="text-center mb-4">Hotels</h1>
-            <form action="" method="get" class="d-flex align-items-center justify-content-center gx-3">
-                <div class="form-check ">
+            <form action="" method="get" class="d-flex align-items-center justify-content-center mb-4">
+                <div class="form-check me-3">
                     <input class="form-check-input" type="checkbox" name="parking" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">
                         Default checkbox
