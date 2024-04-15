@@ -41,6 +41,15 @@ $hotels = [
 
 ];
 
+$filter = $_GET['parking'];
+
+if ($filter == true) {
+    foreach ($hotels as $hotel) {
+        if ($hotel['parking'] == true) {
+            var_dump($hotel['parking']);
+        }
+    }
+}
 
 ?>
 
@@ -63,22 +72,61 @@ $hotels = [
     <main id="site_main" style="height: 100vh;" class="d-flex align-items-center justify-content-center bg-success">
         <div class="container bg-secondary rounded-5 p-4">
             <h1 class="text-center mb-4">Hotels</h1>
+            <form action="" method="get" class="d-flex align-items-center justify-content-center gx-3">
+                <div class="form-check ">
+                    <input class="form-check-input" type="checkbox" name="parking" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Default checkbox
+                    </label>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+
             <div class="row gy-4">
 
-                <?php foreach ($hotels as $key => $hotel) : ?>
-                    <div class="col-4">
-                        <div class="card" style="width:18rem;">
-                            <img src="./hotel-img.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $hotel['name'] ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">Vote: <?= $hotel['vote'] ?></h6>
-                                <p class="card-text">Distance to center: <?= $hotel['distance_to_center'] ?></p>
-                                <p class="card-text">Description: <?= $hotel['description'] ?></p>
+                <!-- si il form riotona falso(cioe se il checkbox non e cliccato) -->
+                <?php if ($filter == false) : ?>
+                    <!-- itera nell array di hotels -->
+                    <?php foreach ($hotels as $key => $hotel) : ?>
+                        <div class="col-4">
+                            <div class="card" style="width:18rem;">
+                                <img src="./hotel-img.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $hotel['name'] ?></h5>
+                                    <h6 class="card-subtitle mb-2 text-muted ">Vote: <?= $hotel['vote'] ?></h6>
+                                    <p class="card-text">Distance to center: <?= $hotel['distance_to_center'] ?></p>
+                                    <p class="card-text">Description: <?= $hotel['description'] ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                <?php endforeach; ?>
+                    <? endforeach; ?>
+                    <!-- fine ierazione -->
+                    <!-- altrimenti se il ritorno di form e true(cioe se il checkbox e stato cliccato) -->
+                <?php elseif ($filter == true) : ?>
+                    <!-- itera solo quelli che nella chiave 'parking' il valore e true nell'array di hotels -->
+                    <?php foreach ($hotels as $key => $hotel) :  if ($hotel['parking'] === true) : ?>
+                            <div class="col-4">
+                                <div class="card" style="width:18rem;">
+                                    <img src="./hotel-img.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $hotel['name'] ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted ">Vote: <?= $hotel['vote'] ?></h6>
+                                        <p class="card-text">Distance to center: <?= $hotel['distance_to_center'] ?></p>
+                                        <p class="card-text">Description: <?= $hotel['description'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <? endif;
+                    endforeach; ?>
+                    <!-- finisce iterazione -->
+
+                <?php endif; ?>
+                <!-- fine condizione -->
+
+
             </div>
 
 
